@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cable Knitting Simulation</title>
+    <script src="https://unpkg.com/htmx.org@1.9.4"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .control-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            width: 300px;
+        }
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            text-align: left;
+            margin: 10px 0;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        img {
+            border: 1px solid black;
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cable Knitting Simulation</h1>
+
+    <div class="container">
+        <!-- Control Panel for Sliders -->
+        <div class="control-panel">
+            <h3>Adjust Grid Size</h3>
+
+            <div class="slider-container">
+                <label for="rows">Rows: <span id="rowValue">30</span></label>
+                <input type="range" id="rows" name="rows" min="10" max="50" value="30"
+                       hx-trigger="input from:#rows, change from:#rows"
+                       oninput="updateImage()">
+            </div>
+
+            <div class="slider-container">
+                <label for="columns">Columns: <span id="colValue">30</span></label>
+                <input type="range" id="columns" name="columns" min="15" max="60" value="30"
+                       hx-trigger="input from:#columns, change from:#columns"
+                       oninput="updateImage()">
+            </div>
+        </div>
+
+        <!-- Display the Knitting Grid Image -->
+        <img id="knittingCanvas" src="/simulate?rows=30&columns=30&time=0">
+
+    </div>
+
+    <script>
+        // Live update display for sliders
+        document.getElementById('rows').addEventListener('input', function() {
+            document.getElementById('rowValue').innerText = this.value;
+        });
+
+        document.getElementById('columns').addEventListener('input', function() {
+            document.getElementById('colValue').innerText = this.value;
+        });
+
+        function updateImage() {
+            let rows = document.getElementById('rows').value;
+            let columns = document.getElementById('columns').value;
+            let timestamp = new Date().getTime();
+            document.getElementById('knittingCanvas').src = `/simulate?rows=${rows}&columns=${columns}&time=${timestamp}`;
+        }
+    </script>
+</body>
+</html>
