@@ -4,6 +4,8 @@ import base64
 from PIL import Image
 
 # Initialize Pygame
+import os
+os.environ["SDL_AUDIODRIVER"] = "dummy"  # Disable sound to avoid errors
 pygame.init()
 
 # Canvas size
