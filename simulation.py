@@ -1,3 +1,7 @@
+import os
+os.environ["SDL_AUDIODRIVER"] = "dummy"  # Disable sound system
+os.environ["SDL_VIDEODRIVER"] = "dummy"  # Disable display system
+
 import pygame
 import io
 import base64
@@ -5,7 +9,8 @@ from PIL import Image
 
 # Initialize Pygame
 import os
-os.environ["SDL_AUDIODRIVER"] = "dummy"  # Disable sound to avoid errors
+os.environ["SDL_AUDIODRIVER"] = "dummy"  # Disable sound
+os.environ["SDL_VIDEODRIVER"] = "dummy"  # Disable display errors in cloud servers
 pygame.init()
 
 # Canvas size
