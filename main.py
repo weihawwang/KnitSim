@@ -5,6 +5,8 @@ from jinja2 import Template
 import base64
 import uvicorn
 from simulation import draw_knitting_pattern
+from stitch import Stitch
+
 
 app = FastAPI()
 
